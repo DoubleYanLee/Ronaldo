@@ -1,7 +1,8 @@
-package LikeDataStream;
+package client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,6 +51,34 @@ public class Stream implements Serializable {
         this.windowSlide = 1;
     }
 
+    /**
+     * Stream constructor
+     * @param op          Operator to use on the data passing trough the node
+     * @param winSize     Size of the window for the operation
+     * @param parents     Previous streams from which this one is derived
+     */
+    public Stream(Op op, int winSize, Stream ...parents) {
+        this();
+        this.parents = Arrays.asList(parents);
+        this.operation = op;
+        this.windowSize = winSize;
+
+        for(Stream p : parents) {
+            p.addChild(this);
+        }
+
+    }
+
+    public void addChild(Stream child) {
+        this.children.add(child);
+    }
+
+    /**
+     * Returns the stream's unique id
+     */
+    public int getID() {
+        return this.id;
+    }
 
 
 }

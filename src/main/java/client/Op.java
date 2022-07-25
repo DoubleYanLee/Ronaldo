@@ -1,15 +1,13 @@
-package LikeDataStream;
+package client;
 
 /**
  * define the operation of stream
- * the five basis operators: Source, Sink, Map, KeyBy, Reduce
+ * the three basis operators:  Map, KeyBy, Reduce
  */
 
 public enum Op
 {
     NONE("NONE"),
-    Source("Source"),
-    Sink("Sink"),
     Map("Map"),
     KeyBy("KeyBy"),
     Reduce("Reduce");
