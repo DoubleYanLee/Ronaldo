@@ -1,14 +1,12 @@
 package node.common;
 
-public class FloatData {
+public class FloatData extends DataAtom{
     private static final long serialVersionUID = 3328508760950595947L;
     private double data;
-    private long timestamp;
-
 
     public FloatData(long timestamp, double value)
     {
-        this.timestamp = timestamp;
+        super(timestamp);
         data = value;
     }
 

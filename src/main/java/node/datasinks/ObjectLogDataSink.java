@@ -1,5 +1,6 @@
 package node.datasinks;
 
+import node.common.DataAtom;
 import node.common.FloatData;
 
 /**
@@ -21,7 +22,7 @@ public class ObjectLogDataSink implements DataSink{
         return id;
     }
 
-    public void processAtom(FloatData floatdata, int sourceId) {
+    public void processAtom(DataAtom atom, int sourceId) {
 
         //write log
 
@@ -35,7 +36,7 @@ public class ObjectLogDataSink implements DataSink{
 
     }
 
-    public boolean inputRestriction(Class<? extends FloatData> input) {
+    public boolean inputRestriction(Class<? extends DataAtom> input) {
         return true;
     }
 }

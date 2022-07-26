@@ -1,5 +1,6 @@
 package node.datasinks;
 
+import node.common.DataAtom;
 import node.common.FloatData;
 
 import java.io.BufferedWriter;
@@ -30,9 +31,9 @@ public class FileDataSink implements DataSink {
     }
 
 
-    public void processAtom(FloatData floatdata, int sourceId) {
+    public void processAtom(DataAtom atom, int sourceId) {
         try {
-            outStream.write(((FloatData) floatdata).floatValue() + "\n");
+            outStream.write(((FloatData) atom).floatValue() + "\n");
         } catch (IOException e) {
             // do nothing..
         }
@@ -55,7 +56,7 @@ public class FileDataSink implements DataSink {
         }
     }
 
-    public boolean inputRestriction(Class<? extends FloatData> input) {
+    public boolean inputRestriction(Class<? extends DataAtom> input) {
         return input == FloatData.class;
     }
 }

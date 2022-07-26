@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Stream Representation
@@ -74,11 +75,84 @@ public class Stream implements Serializable {
     }
 
     /**
+     * Returns the parent streams
+     */
+    public List<Stream> getParents() {
+        return this.parents;
+    }
+
+
+    public List<Stream> getChildren()
+    {
+        return this.children;
+    }
+
+    /**
+     * Returns the current operation's window size
+     */
+    public int getWindowSize() {
+        return this.windowSize;
+    }
+
+    /**
+     * Returns the current operation window's sliding factor
+     */
+    public int getWindowSlide() {
+        return this.windowSlide;
+    }
+
+    /**
+     * Returns the operation applied on this stream
+     */
+    public Op getOperation() {
+        return this.operation;
+    }
+
+
+
+    /**
      * Returns the stream's unique id
      */
     public int getID() {
         return this.id;
     }
+
+    /**
+     * Returns the (only) root of the streams dag
+     */
+    public Stream traceSource() {
+        if(this.parents.isEmpty())
+            return this;
+
+        return this.parents.get(0).traceSource();
+    }
+
+
+    /**
+     * Serializes the stream, in the format
+     * (id, op, windowSize, (children), (parents))
+     *
+     */
+    @Override
+    public String toString() {
+        String id = Integer.toString(getID());
+        String op = this.operation.getName();
+        String win = Integer.toString(getWindowSize());
+        String slide = Integer.toString(getWindowSlide());
+
+        String childrensID = "(" + children.stream()
+                .map(child -> Integer.toString(child.getID()))
+                .collect(Collectors.joining(",")) + ")";
+        String parentsID = "(" + parents.stream()
+                .map(parent -> Integer.toString(parent.getID()))
+                .collect(Collectors.joining(",")) + ")";
+
+        String paramsString = String.join(";", this.params);
+
+        return new String("(" + String.join(";", id, op, win, slide, paramsString, parentsID, childrensID) + ")");
+
+    }
+
 
 
 }

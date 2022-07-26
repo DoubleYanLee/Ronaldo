@@ -1,12 +1,13 @@
 package node.datasinks;
 
+import node.common.DataAtom;
 import node.common.FloatData;
 
 import java.io.Serializable;
 
 public interface DataSink extends Serializable {
 
-    public void processAtom(FloatData floatdata, int sourceId);
+    public void processAtom(DataAtom atom, int sourceId);
 
     /**
      * Performs initialization procedures (e.g. opening files/urls etc..)
@@ -21,6 +22,6 @@ public interface DataSink extends Serializable {
     /**
      * @return True if the specified input class is allowed
      */
-    public boolean inputRestriction(Class<? extends FloatData> input);
+    public boolean inputRestriction(Class<? extends DataAtom> input);
 
 }
