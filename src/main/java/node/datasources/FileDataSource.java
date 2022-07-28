@@ -21,6 +21,7 @@ public class FileDataSource extends AbstractDataSource {
 
     public FileDataSource(FileProducerStream stream)
     {
+
         this(stream.getID(), stream.getFilePath());
     }
 

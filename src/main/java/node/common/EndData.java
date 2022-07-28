@@ -10,6 +10,15 @@ public class EndData extends DataAtom {
         super(timestamp);
     }
 
+    //写入filesink有误 test
+//    private String data;
+//    public EndData(long timestamp, String value)
+//    {
+//        super(timestamp);
+//        data = value;
+//    }
+
+
 
     public String toString()
     {
